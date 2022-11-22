@@ -22,12 +22,7 @@ mgr = owm.weather_manager()
 # /start 
 @bot.message_handler(commands=['start'])
 def start(message):
-	# Buttons
-	markup = types.ReplyKeyboardMarkup()
-	button_quotes = types.KeyboardButton('/quote')
-	button_weather = types.KeyboardButton('/weather')
-	button_help = types.KeyboardButton('/help')
-	markup.add(button_quotes, button_weather, button_help)
+
 	# bot.send_message(message.chat.id, 'Welcome, dear user! Commands:', reply_markup=markup)
 	# Send a sticker
 	## Can i send an animated sticker???
@@ -42,19 +37,12 @@ def start(message):
 	/help - print this help message
 	/quote - print a randomly-selected motivational quote
 	/weather - print a forecast for a specific city
-	""", 
-	reply_markup=markup
+	"""
 	)
 
 # Handle incoming /start, /help messages
 @bot.message_handler(commands=['help'])
 def welcome(message):
-	# Buttons
-	markup = types.ReplyKeyboardMarkup()
-	button_quotes = types.KeyboardButton('/quote')
-	button_weather = types.KeyboardButton('/weather')
-	button_help = types.KeyboardButton('/help')
-	markup.add(button_quotes, button_weather, button_help)
 	# bot.send_message(message.chat.id, 'Welcome, dear user! Commands:', reply_markup=markup)
 	bot.send_message(message.chat.id, """ HELP MENU 
 	
@@ -63,7 +51,7 @@ def welcome(message):
 	/help - print this help message
 	/quote - print a randomly-selected motivational quote
 	/weather - print a forecast for a specific city
-	""", reply_markup=markup)
+	""")
 
 
 # Respond to the button commands
