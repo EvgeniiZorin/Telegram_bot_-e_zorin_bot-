@@ -42,7 +42,9 @@ def start(message):
 	/help - print this help message
 	/quote - print a randomly-selected motivational quote
 	/weather - print a forecast for a specific city
-	""", reply_markup=markup)
+	""", 
+	reply_markup=markup
+	)
 
 # Handle incoming /start, /help messages
 @bot.message_handler(commands=['help'])
@@ -124,8 +126,16 @@ def process_name_step(message):
 		bot.send_message(message.chat.id, output)
 
 
+@bot.message_handler(content_types=['sticker'])
+def sticker_handler(message):
+	bot.reply_to(message, "Thanks for the sticker! Here's my favourite sticker:")
+	# print(message.sticker) # To print info, e.g. ID, about the sticker
+	bot.send_sticker(message.chat.id, 'CAACAgIAAxkBAAICG2N8HI-dzXnLfuYHqvIgNZ9aUaaPAAMBAAIWfGgD-lJ5LW5TPaYrBA')
+
 # Handle all unknown messages
 @bot.message_handler(func = lambda message: True)
+# @bot.edited_message_handler(content_types=['text']) ## This decorator is useful if you also want to handle edited messages, i.e. someone edited message
+# and you handle it again, but the edited version this time
 def unknown_msg(message):
 	smile = '😕'
 	bot.reply_to(message, f'Unknown command {smile}; please try again or enter /help to check available commands.')
